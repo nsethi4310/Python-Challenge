@@ -24,8 +24,20 @@ with open(election,'r') as csvfile:
     #looping through each row in the budget_reader
     for row in election_reader:
      rowcount = rowcount+1
-     candidate = lstofCandidate.append(row[2])
-     print(candidate[1])
+     #candidate = lstofCandidate.append(row[2])
+     #print(candidate[1])
 
       
-print("Total_votes  :"+str(rowcount))      
+print("Total_votes  :"+str(rowcount))     
+
+#Printing to output file
+output_path = os.path.join("./Analysis/output.txt")
+
+with open(output_path, 'w') as txtfile:
+    txtfile.writelines("Election Results")
+    txtfile.write('\n')
+    txtfile.writelines("---------------------")
+    txtfile.write('\n')
+    txtfile.write("Total votes : " + str(rowcount))
+    txtfile.write('\n')
+    
