@@ -1,3 +1,5 @@
-Election Results
----------------------
+Votes Analysis---------------------
 Total votes : 3521001
+Candidates and Percentage of Votes
+{'Khan': 63.0, 'Correy': 20.0, 'Li': 14.0, "O'Tooley": 3.0}
+Winner is ....: Khan

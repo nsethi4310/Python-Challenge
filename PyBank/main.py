@@ -19,6 +19,9 @@ laverage=0
 max_change=0
 min_change=0
 month_list=[]
+Inc_lt  = ["",9999]
+Dec_lt= ["",0]
+
 
 #Opening  the file as read only and assigning to variable
 
@@ -43,17 +46,25 @@ with open(budget_r,'r') as csvfile:
         average=int(row[1])-prev_col
         prev_col=int(row[1])
         average_change.append(average)
-       
+        #Getting the greatest increase and month
+        if average> Inc_lt[1]:
+            Inc_lt[0] = row[0]
+            Inc_lt[1] = average
+        #Getting the greatest decrease and month
+        if average< Dec_lt[1]:
+            Dec_lt[0]=row[0]
+            Dec_lt[1]= average
+
+  
+            
+         
                 
                
  #Deleting First element of array       
 average_change.pop(0)
 #Calculating average of change
 laverage= sum(average_change)/len(average_change)
-#Getting max change from array
-max_change= max(average_change)
-#Getting min change
-min_change=min(average_change)
+
 
         
        
@@ -61,13 +72,17 @@ min_change=min(average_change)
 print("Financial Analysis")
 print("---------------------")
 print("Total months : "+ str(rowcount))
-print("Total Profit " +str(plsum))
-print("average increase/decrease"+ str(round(laverage,2)))
-print("Greatest Increase in Profits: "+ str(max_change))
-print("Greatest Decrease in Profits: "+ str(min_change))
+print("Total Profit is $" +str(plsum))
+print("Average increase/decrease is $"+ str(round(laverage,2)))
+# print("Greatest Increase in Profits: "+ str(max_change))
+# print("Greatest Decrease in Profits: "+ str(min_change))
+print("Greatest Increase in Profits in "+ (Inc_lt[0]) +" is $ " + str(Inc_lt[1]))
+print("Greatest Decrease in Profits in " + (Dec_lt[0]) +" is $" + str(Dec_lt[1]))
 
 
-#Pri ting to output file
+
+
+#Printing to output file
 output_path = os.path.join("./Analysis/output.txt")
 
 with open(output_path, 'w') as txtfile:
@@ -78,10 +93,10 @@ with open(output_path, 'w') as txtfile:
     txtfile.write('\n')
     txtfile.write("Total months : " + str(rowcount))
     txtfile.write('\n')
-    txtfile.write("Total Profit : " +str(plsum))
+    txtfile.write("Total Profit is $" +str(plsum))
     txtfile.write('\n')
-    txtfile.write("average increase/decrease"+ str(round(laverage,2)))
+    txtfile.write("Average increase/decrease is $"+ str(round(laverage,2)))
     txtfile.write('\n')
-    txtfile.write("Greatest Increase in Profits: "+ str(max_change))
+    txtfile.write("Greatest Increase in Profits in "+ (Inc_lt[0]) +" is $ " + str(Inc_lt[1]))
     txtfile.write('\n')
-    txtfile.write("Greatest Decrease in Profits: "+ str(min_change))
+    txtfile.write("Greatest Decrease in Profits in " + (Dec_lt[0]) +" is $" + str(Dec_lt[1]))
